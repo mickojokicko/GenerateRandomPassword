@@ -15,7 +15,7 @@ let generatedPassword: string;
 
 function generateRondomPassword(): string {
   let password: string = '';
-  let length = Number(lengthEl.value);
+  let length: number = Number(lengthEl.value);
   let chars: string = '';
 
   chars += uppercaseEl.checked ? uppercaseChars : '';
@@ -24,8 +24,8 @@ function generateRondomPassword(): string {
   chars += symbolsEl.checked ? symbolsChars : '';
 
   for (let i = 0; i < length; i++) {
-    let rand = Math.floor(Math.random() * chars.length);
-    password += chars.substring(rand, rand + 1);
+    let random = Math.floor(Math.random() * chars.length);
+    password += chars.substring(random, random + 1);
   }
 
   return password;
