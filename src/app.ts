@@ -39,10 +39,20 @@ function generateRondomPassword(): string {
   return password;
 }
 
-async function copyPassword() {
+async function copyPassword(): Promise<void> {
   if (navigator.clipboard) {
-    await navigator.clipboard.writeText(passwordEl.value);
-    alert('Password copied😁');
+    if (passwordEl.value.length > 0) {
+      try {
+        await navigator.clipboard.writeText(passwordEl.value);
+        alert('Password copied😁');
+      } catch (err) {
+        alert('Failed to copy password: ' + err);
+      }
+    } else {
+      alert('Password field is empty. Please generate a password first.');
+    }
+  } else {
+    alert('Clipboard API not supported');
   }
 }
 
