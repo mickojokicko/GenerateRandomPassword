@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 // Elements
 const passwordEl = document.getElementById('password');
 const lengthEl = document.getElementById('length');
@@ -10,6 +19,10 @@ const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVXYZ';
 const lowercaseChars = 'abcdefghijklmnopqrstuvxyz';
 const numbersChars = '0123456789';
 const symbolsChars = '!@#$%&^*()';
+// BUttons
+const getPasswordBtn = document.getElementById('generate');
+const generateAnotherWay = document.getElementById('generateAnotherWay');
+const copyBtn = document.getElementById('copy');
 let generatedPassword;
 function generateRondomPassword() {
     let password = '';
@@ -25,12 +38,17 @@ function generateRondomPassword() {
     }
     return password;
 }
+function copyPassword() {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (navigator.clipboard) {
+            yield navigator.clipboard.writeText(passwordEl.value);
+            alert('Password copied😁');
+        }
+    });
+}
 function updateUiPassword(data) {
     passwordEl.value = data;
 }
-// BUttons
-const getPasswordBtn = document.getElementById('generate');
-const generateAnotherWay = document.getElementById('generateAnotherWay');
 // Alternative way
 let allChars;
 allChars = [
@@ -57,8 +75,9 @@ function displayPasswortUi() {
     passwordEl.value = packed;
 }
 // execution
-getPasswordBtn.addEventListener('click', () => {
+getPasswordBtn === null || getPasswordBtn === void 0 ? void 0 : getPasswordBtn.addEventListener('click', () => {
     generatedPassword = generateRondomPassword();
     updateUiPassword(generatedPassword);
 });
 generateAnotherWay === null || generateAnotherWay === void 0 ? void 0 : generateAnotherWay.addEventListener('click', displayPasswortUi);
+copyBtn.addEventListener('click', copyPassword);

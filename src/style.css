@@ -82,12 +82,12 @@ input[type='checkbox'] {
   cursor: pointer;
   background: linear-gradient(to right, #a770c7 25%, #2270ce 75%);
   background-clip: text;
-  /* -webkit-text-fill-color: teal; */
+  -webkit-text-fill-color: teal;
   color: #2270ce;
 }
 
 .password-wrap button:hover {
-  background-color: transparent;
+  background-clip: text;
   transform: scale(1.2);
 }
 

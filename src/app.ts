@@ -11,6 +11,14 @@ const lowercaseChars: string = 'abcdefghijklmnopqrstuvxyz';
 const numbersChars: string = '0123456789';
 const symbolsChars: string = '!@#$%&^*()';
 
+// BUttons
+
+const getPasswordBtn = document.getElementById('generate') as HTMLButtonElement;
+const generateAnotherWay = document.getElementById(
+  'generateAnotherWay'
+) as HTMLBRElement;
+const copyBtn = document.getElementById('copy') as HTMLButtonElement;
+
 let generatedPassword: string;
 
 function generateRondomPassword(): string {
@@ -31,16 +39,16 @@ function generateRondomPassword(): string {
   return password;
 }
 
+async function copyPassword() {
+  if (navigator.clipboard) {
+    await navigator.clipboard.writeText(passwordEl.value);
+    alert('Password copied😁');
+  }
+}
+
 function updateUiPassword(data: string) {
   passwordEl.value = data;
 }
-
-// BUttons
-
-const getPasswordBtn = document.getElementById('generate') as HTMLButtonElement;
-const generateAnotherWay = document.getElementById(
-  'generateAnotherWay'
-) as HTMLBRElement;
 
 // Alternative way
 
@@ -74,9 +82,11 @@ function displayPasswortUi() {
 }
 
 // execution
-getPasswordBtn.addEventListener('click', () => {
+getPasswordBtn?.addEventListener('click', () => {
   generatedPassword = generateRondomPassword();
   updateUiPassword(generatedPassword);
 });
 
 generateAnotherWay?.addEventListener('click', displayPasswortUi);
+
+copyBtn.addEventListener('click', copyPassword);
